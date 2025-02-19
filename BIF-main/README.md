@@ -9,6 +9,11 @@
 5. Eigen3
 
 #### 2. Run
+cd ~/catkin_ws/src
+download BIF-main file 
+cd ..
+catkin_make 
+source devel/setup.bash
 rosrun fingerprint binary_fingerprint 
 
 #### 3.visualize pr curve
