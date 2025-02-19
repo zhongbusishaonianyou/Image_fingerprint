@@ -10,6 +10,7 @@
 
 #### 2. Run
 cd ~/catkin_ws/src
+
 git clone https://github.com/zhongbusishaonianyou/Image_fingerprint.git
 cd ..
 catkin_make 
