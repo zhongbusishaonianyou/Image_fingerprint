@@ -26,7 +26,8 @@ rosrun fingerprint binary_fingerprint
 
    | KITTI 00                                                     |                                                              |
    | ------------------------------------------------------------ | ------------------------------------------------------------ |
-   | ![00](/home/zgy/ROS/Binary_fingerprint/src/BIF-main/png/00.png) | ![00_traj](/home/zgy/ROS/Binary_fingerprint/src/BIF-main/png/00_traj.png) |
+   | ![00](https://github.com/user-attachments/assets/7e78231c-e5a4-4e4b-b23b-e07cbefb048d)  |![00_traj](https://github.com/user-attachments/assets/d2480c5c-3e57-4201-bf06-964fa08fdc93)
+
 
    
 
