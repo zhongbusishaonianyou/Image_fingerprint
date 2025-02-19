@@ -24,19 +24,19 @@ rosrun fingerprint binary_fingerprint
 
 3. you will see  following images:
 
-   |                                                           KITTI 00                                                          |
+   |                                                     KITTI 00 |                                                              |
    | ------------------------------------------------------------ | ------------------------------------------------------------ |
    | ![00](https://github.com/user-attachments/assets/7e78231c-e5a4-4e4b-b23b-e07cbefb048d)  |![00_traj](https://github.com/user-attachments/assets/d2480c5c-3e57-4201-bf06-964fa08fdc93)
 
 
    
 
-   |                                                           KITTI 02                                                          |
+   |                                                     KITTI 02 |                                                              |
    | ------------------------------------------------------------ | ------------------------------------------------------------ |
    |    ![02](https://github.com/user-attachments/assets/8d627c37-eae3-4b07-99ee-681170524428) |![02_traj](https://github.com/user-attachments/assets/35d14a09-2412-4d67-9ad1-a4e5e7083e3b)
 
 
-   |                                                           KITTI 08                                                          |
+   |                                                     KITTI 08 |                                                              |
    | ------------------------------------------------------------ | ------------------------------------------------------------ |
    | ![08](https://github.com/user-attachments/assets/bc38d88a-ba8c-4a94-9b80-2f2e217e58ef)  |![08_traj](https://github.com/user-attachments/assets/4d81fc12-3c76-4226-9986-0aaf7de7a9ec)
 
