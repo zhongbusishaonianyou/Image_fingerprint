@@ -76,5 +76,13 @@ rosrun fingerprint binary_fingerprint
   keywords={Iris;Three-dimensional displays;Laser radar;Protocols;Image representation;Robot sensing systems;Intelligent robots},
   doi={10.1109/IROS45743.2020.9341010}
   }
+@INPROCEEDINGS { gkim-2018-iros,
+  author = {Kim, Giseop and Kim, Ayoung},
+  title = { Scan Context: Egocentric Spatial Descriptor for Place Recognition within {3D} Point Cloud Map },
+  booktitle = { Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems },
+  year = { 2018 },
+  month = { Oct. },
+  address = { Madrid }
+}
 
 ```
