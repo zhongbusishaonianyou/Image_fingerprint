@@ -11,6 +11,12 @@
 #### 2. Run
 
 cd ~/catkin_ws/src
+git clone https://github.com/YungeCui/BoW3D/
+cd ..
+catkin_make -j8
+source devel/setup.bash
+rosrun BoW3D bow3d
+cd ~/catkin_ws/src
 
 download BIF-main file 
 
