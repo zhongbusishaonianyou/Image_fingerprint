@@ -9,12 +9,6 @@
 5. Eigen3
 
 #### 2. Run
-cd ~/catkin_ws/src
-
-git clone https://github.com/zhongbusishaonianyou/Image_fingerprint.git
-cd ..
-catkin_make 
-source devel/setup.bash
 rosrun fingerprint binary_fingerprint 
 
 #### 3.visualize pr curve
