@@ -1,4 +1,4 @@
-#How to use?
+# How to use?
 
 - Modify to your file path and file name
 
@@ -6,7 +6,7 @@
 
 - After the run is finished, you will find a new folder named 'data', which contains three run result files.
 
-We will release a C++ version of this method in the future.
+- We will release a C++ version of this method in the future.
 
 note: if you want to draw pr curve,you can use scancontext source code directly.
 
