@@ -8,8 +8,8 @@ global data_path;
 %      - <00001.bin>
 %      - <00002.bin>
 %% data path setting
-data_path = '../../loop_closure/08/'; 
-GTposes_file='08.csv';
+data_path = '../../loop_closure/00/'; 
+GTposes_file='00.csv';
 
 %% loading ground-truth poses and creating structural feature matrix SFM
 SFM_dim = [80,120];Range=80; 
@@ -17,7 +17,7 @@ SFM_dim = [80,120];Range=80;
 
 %% loop parameter setting
  revisit_thres = 4; % 
- num_candidates = 300;
+ num_node_enough_apart = 300;
  
 %% BIF parameter setting
 bif_size=16;%BIF size
@@ -26,7 +26,8 @@ BIF=cell(1,num_queries);
 dct_result=cell(1,num_queries);
 rim=zeros(num_queries,SFM_dim(2));
 ringkeys=zeros(num_queries,SFM_dim(1));
-BIF_loop=zeros(num_queries-num_candidates,3);
+results=zeros(num_queries-num_node_enough_apart,2);
+is_revisit=zeros(num_queries-num_node_enough_apart,1);
 %% DCT transform setting
 % You can use matlab's dct2 function directly, but it is less efficient
 %one dimension dct transform  needs factor
@@ -65,15 +66,15 @@ BIF_loop=zeros(num_queries-num_candidates,3);
     query_rk=ringkeys(query_idx,:);
     min_hamming_dis=1;
 
-    if( query_idx <= num_candidates )
+    if( query_idx <= num_node_enough_apart )
        continue;
     end
 
         % judging revisitness by using ground-truth poses
-       is_revisit= Loop_truth(query_pose, GT_poses(1:query_idx-num_candidates, :), revisit_thres);
-    
+       revisitness= Loop_truth(query_pose, GT_poses(1:query_idx-num_node_enough_apart, :), revisit_thres);
+       is_revisit(query_idx-num_node_enough_apart,1)=revisitness;
         % k-nearest neighbor search
-        tree = createns(ringkeys(1:query_idx-num_candidates, :), 'NSMethod', 'kdtree'); 
+        tree = createns(ringkeys(1:query_idx-num_node_enough_apart, :), 'NSMethod', 'kdtree'); 
         candidates = knnsearch(tree, query_rk, 'K', 20); %10 is ok
   
     for ith_candidate = 1:length(candidates)
@@ -92,13 +93,51 @@ BIF_loop=zeros(num_queries-num_candidates,3);
         near_idx=candidate_node_idx;
         end
     end  
-      BIF_loop(query_idx-num_candidates,:)=[near_idx,is_revisit,min_hamming_dis]; 
+      results(query_idx-num_node_enough_apart,:)=[near_idx,min_hamming_dis]; 
       
       if( rem(query_idx, 100) == 0)
         disp( strcat(num2str(query_idx/num_queries * 100), ' % processed') );
       end
+end
+%% Entropy thresholds 
+min_thres=min(results(:,2))+0.01;
+max_thres=max(results(:,2))+0.01;
+thresholds = linspace(min_thres, max_thres,100); 
+num_thresholds = length(thresholds);
+
+% Main variables to store the result for drawing PR curve 
+num_hits=zeros(1, num_thresholds);
+Precisions = zeros(1, num_thresholds); 
+Recalls = zeros(1, num_thresholds); 
+true_positive=sum(is_revisit);
+%% prcurve analysis 
+for thres_idx = 1:num_thresholds
+  threshold = thresholds(thres_idx);
+  predict_postive=0;num_hits=0;
+    for frame_idx=1:length(is_revisit)
+        min_dist=results(frame_idx,2);
+        matching_idx=results(frame_idx,1);
+        revisit=is_revisit(frame_idx,1); 
+            if( min_dist <threshold)
+                predict_postive=predict_postive+1;
+                if(dist_btn_pose(GT_poses(frame_idx+num_node_enough_apart,:), GT_poses(matching_idx, :)) < revisit_thres)
+                    %TP
+                    num_hits= num_hits + 1;
+                end     
+            end
+    end
+  
+    Precisions(1, thres_idx) = num_hits/predict_postive;
+    Recalls(1, thres_idx)=num_hits/true_positive;
     
- end
+end
+%% save the log 
+savePath = strcat("pr_result/within ", num2str(revisit_thres), "m/");
+if((~7==exist(savePath,'dir')))
+    mkdir(savePath);
+end
+save(strcat(savePath, 'nPrecisions.mat'), 'Precisions');
+save(strcat(savePath, 'nRecalls.mat'), 'Recalls');
 %% visiualize GT path
 figure(1);hold on;
 plot(GT_poses(:,1), GT_poses(:,2),'LineWidth',2);
@@ -106,6 +145,6 @@ axis equal; grid on;
 legend('Groud-Truth');
 
 %%  save the loop information
-    data_save_path = fullfile('./data/'); 
-    filename = strcat(data_save_path, 'BIF_loop', '.mat');
-    save(filename, 'BIF_loop');
+data_save_path = fullfile('./data/'); 
+filename = strcat(data_save_path, 'results', '.mat');
+save(filename, 'results');
