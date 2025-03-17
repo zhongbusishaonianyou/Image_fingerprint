@@ -1,10 +1,10 @@
-------How to use?--------------
+#How to use?
 
-1.Modify to your file path and file name
+- Modify to your file path and file name
 
-2.run main.m
+- run main.m
 
-After the run is finished, you will find a new folder named 'data', which contains three run result files.
+- After the run is finished, you will find a new folder named 'data', which contains three run result files.
 
 We will release a C++ version of this method in the future.
 
