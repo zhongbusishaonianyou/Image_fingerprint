@@ -1,5 +1,9 @@
 # Binary Image Fingerprint: Stable Structure Identifier for 3D LiDAR Place Recognition(RA-L 2023)
 Abstract:The method extracts important information from structural feature matrix by image compression, and the resulting binary matrix with small size is used as a unique identifier for each frame of the point cloud. This matrix is called the binary image fingerprint (BIF). The Hamming distance between two binary image fingerprints is used for similarity matching when performing place recognition. The use of logical operations to match loop closure frames shows high efficiency.
+- ## pr curve
+![组合](https://github.com/user-attachments/assets/9f9b435f-406e-44e2-a1e3-13266e0591b8)
+
+- ## pair line
 ![pair_line](https://github.com/user-attachments/assets/8f6f2ac3-987d-4aab-bdbe-356d5894c3d1)
 ```
 @ARTICLE{10187686,
